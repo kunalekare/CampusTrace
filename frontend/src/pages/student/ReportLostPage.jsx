@@ -27,8 +27,8 @@ export function ReportLostPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-4">
       <div>
-        <h1 className="text-2xl font-black text-slate-900">Report a Lost Item</h1>
-        <p className="text-xs text-slate-500 mt-1">
+        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">Report a Lost Item</h1>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Provide accurate details so the matching algorithm can pair your item with newly found belongings.
         </p>
       </div>

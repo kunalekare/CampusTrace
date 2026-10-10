@@ -29,15 +29,19 @@ export function LoginPage() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-extrabold text-slate-900">Sign in to CampusTrace</h2>
-        <p className="text-xs text-slate-500 mt-1">Access your campus lost & found dashboard</p>
+        <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+          Sign in to CampusTrace
+        </h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          Access your campus lost & found dashboard
+        </p>
       </div>
 
       <ErrorMessage message={error} />
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
             Campus Email
           </label>
           <input
@@ -45,21 +49,21 @@ export function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="student@campus.edu"
-            className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             required
           />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
             Password
           </label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
-            className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="••••••••"
+            className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             required
           />
         </div>
@@ -67,22 +71,29 @@ export function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-3 rounded-xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/25 transition flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {loading && <Loader2 className="w-4 h-4 animate-spin" />}
           Sign In
         </button>
       </form>
 
-      <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-500 space-y-1">
-        <p className="font-semibold text-slate-700">Demo Accounts Available:</p>
-        <p>â€¢ Student: <span className="font-mono text-blue-600">student@campus.edu</span> / <span className="font-mono">Password@123</span></p>
-        <p>â€¢ Admin: <span className="font-mono text-blue-600">admin@campustrace.edu</span> / <span className="font-mono">Password@123</span></p>
+      {/* Demo Accounts Box */}
+      <div className="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 text-xs text-slate-500 dark:text-slate-400 space-y-1.5">
+        <p className="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-[11px]">
+          Demo Accounts Available:
+        </p>
+        <p className="text-[11px]">
+          • Student: <span className="font-mono text-blue-600 dark:text-blue-400 font-semibold">student@campus.edu</span> / <span className="font-mono text-slate-700 dark:text-slate-300">Password@123</span>
+        </p>
+        <p className="text-[11px]">
+          • Admin: <span className="font-mono text-blue-600 dark:text-blue-400 font-semibold">admin@campustrace.edu</span> / <span className="font-mono text-slate-700 dark:text-slate-300">Password@123</span>
+        </p>
       </div>
 
-      <div className="text-center text-xs text-slate-500">
+      <div className="text-center text-xs text-slate-500 dark:text-slate-400">
         Don't have an account?{' '}
-        <Link to="/register" className="font-semibold text-blue-600 hover:underline">
+        <Link to="/register" className="font-bold text-blue-600 dark:text-blue-400 hover:underline">
           Create account
         </Link>
       </div>

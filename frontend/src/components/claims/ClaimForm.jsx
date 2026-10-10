@@ -31,12 +31,12 @@ export function ClaimForm({ reportId, matchId, onSuccess, onCancel }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
-      <div className="flex items-center gap-2 text-slate-900 font-bold">
-        <ShieldCheck className="w-5 h-5 text-blue-600" />
-        <h3>Submit Ownership Verification Evidence</h3>
+    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-7 space-y-4 shadow-2xl transition-colors">
+      <div className="flex items-center gap-2.5 text-slate-900 dark:text-white font-bold">
+        <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
+        <h3 className="text-base sm:text-lg font-black tracking-tight">Submit Ownership Verification Evidence</h3>
       </div>
-      <p className="text-xs text-slate-500 leading-relaxed">
+      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
         To prevent fraudulent claims, describe details known only to the true owner (serial numbers, password hints, screen wallpapers, secret stickers, purchase receipt details).
       </p>
 
@@ -44,7 +44,7 @@ export function ClaimForm({ reportId, matchId, onSuccess, onCancel }) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
             Verification Evidence *
           </label>
           <textarea
@@ -52,23 +52,23 @@ export function ClaimForm({ reportId, matchId, onSuccess, onCancel }) {
             value={evidence}
             onChange={(e) => setEvidence(e.target.value)}
             placeholder="e.g. Serial Number on casing, engraved initials, specific lock screen wallpaper photo..."
-            className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             required
           />
         </div>
 
-        <div className="flex justify-end gap-3">
+        <div className="flex justify-end items-center gap-3 pt-2">
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition"
+            className="px-4 py-2.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition flex items-center gap-2 disabled:opacity-50"
+            className="px-5 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 rounded-xl transition flex items-center gap-2 disabled:opacity-50"
           >
             {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
             Submit Claim for Review

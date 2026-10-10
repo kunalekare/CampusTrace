@@ -45,8 +45,8 @@ export function ManageClaimsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-black text-slate-900">Ownership Claim Verification & Handover</h1>
-        <p className="text-xs text-slate-500 mt-1">
+        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">Ownership Claim Verification & Handover</h1>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Review secret identifying answers, inspect item photos, approve claims, and confirm custody handovers
         </p>
       </div>
@@ -57,10 +57,10 @@ export function ManageClaimsPage() {
           const blobName = report.imageBlobName || report.ImageBlobName;
 
           return (
-            <div key={c.claimId} className="bg-white rounded-3xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div key={c.claimId} className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-5 sm:p-6 shadow-sm space-y-4 transition-colors">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 border border-slate-200 cursor-pointer">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 border border-slate-200 dark:border-slate-700 cursor-pointer">
                     <ItemImage
                       blobName={blobName}
                       category={report.category}
@@ -74,18 +74,18 @@ export function ManageClaimsPage() {
                     />
                   </div>
                   <div>
-                    <h3 className="font-extrabold text-slate-900 text-base">Claim for: {report.title || `Item #${c.reportId}`}</h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Claimant: <span className="font-semibold text-slate-800">{c.claimant?.fullName}</span> ({c.claimant?.email})
+                    <h3 className="font-extrabold text-slate-900 dark:text-white text-base">Claim for: {report.title || `Item #${c.reportId}`}</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                      Claimant: <span className="font-semibold text-slate-800 dark:text-slate-200">{c.claimant?.fullName}</span> ({c.claimant?.email})
                     </p>
                   </div>
                 </div>
                 <VerificationStatus status={c.verificationStatus} handoverStatus={c.handoverStatus} />
               </div>
 
-              <div className="bg-amber-50/60 p-4 rounded-2xl border border-amber-200/80 text-xs">
-                <p className="font-bold text-amber-900 uppercase tracking-wider mb-1">Protected Verification Proof Submitted:</p>
-                <p className="text-slate-800 leading-relaxed">{c.verificationEvidence}</p>
+              <div className="bg-amber-50/70 dark:bg-amber-950/30 p-4 rounded-2xl border border-amber-200/80 dark:border-amber-800/60 text-xs">
+                <p className="font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider mb-1">Protected Verification Proof Submitted:</p>
+                <p className="text-slate-800 dark:text-slate-200 leading-relaxed">{c.verificationEvidence}</p>
               </div>
 
               <div className="flex justify-end gap-2 pt-2">
@@ -93,7 +93,7 @@ export function ManageClaimsPage() {
                   <>
                     <button
                       onClick={() => handleReview(c.claimId, 'REJECTED')}
-                      className="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs rounded-xl transition flex items-center gap-1.5"
+                      className="px-4 py-2 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-300 font-bold text-xs rounded-xl transition flex items-center gap-1.5"
                     >
                       <X className="w-3.5 h-3.5" /> Reject Claim
                     </button>

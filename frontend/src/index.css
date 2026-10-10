@@ -24,6 +24,23 @@ html.dark body {
   color: #f1f5f9;
 }
 
+/* Chrome/Safari/Edge dark mode input autofill fix */
+html.dark input:-webkit-autofill,
+html.dark input:-webkit-autofill:hover,
+html.dark input:-webkit-autofill:focus,
+html.dark textarea:-webkit-autofill,
+html.dark textarea:-webkit-autofill:hover,
+html.dark textarea:-webkit-autofill:focus,
+html.dark select:-webkit-autofill,
+html.dark select:-webkit-autofill:hover,
+html.dark select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f8fafc !important;
+  -webkit-box-shadow: 0 0 0px 1000px #1e293b inset !important;
+  box-shadow: 0 0 0px 1000px #1e293b inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: #f8fafc !important;
+}
+
 /* Custom modern scrollbars */
 ::-webkit-scrollbar {
   width: 8px;

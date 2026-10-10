@@ -66,16 +66,16 @@ export function MyReportsPage() {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200/60 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/60 mb-2">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
             Personal Dashboard • Azure SQL Persistent
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
             My Submitted Reports
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             Manage your reported items, inspect uploaded photographs, and update recovery statuses.
           </p>
         </div>
@@ -100,26 +100,26 @@ export function MyReportsPage() {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total Filed</span>
-          <span className="text-2xl font-black text-slate-900">{reports.length}</span>
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 p-4">
+          <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block">Total Filed</span>
+          <span className="text-2xl font-black text-slate-900 dark:text-white">{reports.length}</span>
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 p-4">
           <span className="text-[11px] font-bold text-amber-500 uppercase tracking-wider block">Lost Items</span>
-          <span className="text-2xl font-black text-slate-900">{totalLost}</span>
+          <span className="text-2xl font-black text-slate-900 dark:text-white">{totalLost}</span>
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 p-4">
           <span className="text-[11px] font-bold text-blue-500 uppercase tracking-wider block">Found Items</span>
-          <span className="text-2xl font-black text-slate-900">{totalFound}</span>
+          <span className="text-2xl font-black text-slate-900 dark:text-white">{totalFound}</span>
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 p-4">
           <span className="text-[11px] font-bold text-emerald-500 uppercase tracking-wider block">Resolved</span>
-          <span className="text-2xl font-black text-slate-900">{totalResolved}</span>
+          <span className="text-2xl font-black text-slate-900 dark:text-white">{totalResolved}</span>
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-2 text-xs font-bold">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-xs font-bold">
         {[
           { key: 'ALL', label: `All Reports (${reports.length})` },
           { key: 'LOST', label: `Lost Belongs (${totalLost})` },
@@ -130,8 +130,8 @@ export function MyReportsPage() {
             onClick={() => setFilterType(tab.key)}
             className={`px-3 py-1.5 rounded-xl transition ${
               filterType === tab.key
-                ? 'bg-slate-900 text-white shadow-sm'
-                : 'text-slate-600 hover:bg-slate-100'
+                ? 'bg-slate-900 dark:bg-blue-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             {tab.label}
@@ -157,7 +157,7 @@ export function MyReportsPage() {
               <div
                 key={repId}
                 onClick={() => setSelectedReport(report)}
-                className="group bg-white rounded-2xl border border-slate-200/90 hover:border-blue-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between"
+                className="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between"
               >
                 <div>
                   <div className="relative">
@@ -192,25 +192,25 @@ export function MyReportsPage() {
                   </div>
 
                   <div className="p-5">
-                    <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500 mb-2">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                    <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-2">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                         <Tag className="w-3 h-3 text-slate-400" />
                         {report.category}
                       </span>
                       {report.brand && (
-                        <span className="text-slate-400 font-medium">• {report.brand}</span>
+                        <span className="text-slate-400 dark:text-slate-500 font-medium">• {report.brand}</span>
                       )}
                     </div>
 
-                    <h3 className="text-base font-bold text-slate-900 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {report.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">
                       {report.description}
                     </p>
 
-                    <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-500">
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
                       <div className="flex items-center gap-2">
                         <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
                         <span className="truncate">{report.location}</span>
@@ -223,9 +223,9 @@ export function MyReportsPage() {
                   </div>
                 </div>
 
-                <div className="px-5 pb-5 pt-1 flex items-center justify-between border-t border-slate-50 mt-1">
-                  <span className="text-[11px] text-slate-400 font-medium">Click to inspect</span>
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:translate-x-0.5 transition">
+                <div className="px-5 pb-5 pt-1 flex items-center justify-between border-t border-slate-50 dark:border-slate-800/60 mt-1">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">Click to inspect</span>
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition">
                     <span>Manage Details</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
@@ -239,7 +239,7 @@ export function MyReportsPage() {
       {/* Report Inspection Modal */}
       {selectedReport && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
-          <div className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 overflow-hidden max-h-[92vh] flex flex-col">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden max-h-[92vh] flex flex-col">
             {/* Modal Image Header */}
             <div className="relative bg-slate-900 w-full h-72 sm:h-80 flex-shrink-0 group">
               <ItemImage
@@ -294,33 +294,33 @@ export function MyReportsPage() {
             {/* Modal Body */}
             <div className="p-6 sm:p-7 overflow-y-auto space-y-6">
               <div>
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
                   <span>{selectedReport.category}</span>
                   {selectedReport.brand && <span>• {selectedReport.brand}</span>}
                 </div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
                   {selectedReport.title}
                 </h2>
               </div>
 
               {/* Description */}
-              <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+              <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4">
+                <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
                   Item Description
                 </h4>
-                <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                   {selectedReport.description}
                 </p>
               </div>
 
               {/* Private Ownership Verification (Visible to Owner!) */}
               {selectedReport.privateVerificationDetails && (
-                <div className="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4">
-                  <h4 className="text-xs font-bold text-amber-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <div className="bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/80 rounded-2xl p-4">
+                  <h4 className="text-xs font-bold text-amber-900 dark:text-amber-200 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-amber-600" />
                     Private Ownership Verification (Owner Eyes Only)
                   </h4>
-                  <p className="text-xs text-amber-800 leading-relaxed">
+                  <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
                     {selectedReport.privateVerificationDetails}
                   </p>
                 </div>
@@ -328,21 +328,21 @@ export function MyReportsPage() {
 
               {/* Storage & Handover info */}
               {(selectedReport.storageLocation || selectedReport.handoverNotes) && (
-                <div className="bg-blue-50/70 border border-blue-200/80 rounded-2xl p-4 space-y-1.5">
-                  <h4 className="text-xs font-bold text-blue-900 uppercase tracking-wider">
+                <div className="bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800/80 rounded-2xl p-4 space-y-1.5">
+                  <h4 className="text-xs font-bold text-blue-900 dark:text-blue-200 uppercase tracking-wider">
                     Holding / Handover Notes
                   </h4>
                   {selectedReport.storageLocation && (
-                    <p className="text-xs text-blue-900 font-semibold">Location: {selectedReport.storageLocation}</p>
+                    <p className="text-xs text-blue-900 dark:text-blue-200 font-semibold">Location: {selectedReport.storageLocation}</p>
                   )}
                   {selectedReport.handoverNotes && (
-                    <p className="text-xs text-blue-800">Notes: {selectedReport.handoverNotes}</p>
+                    <p className="text-xs text-blue-800 dark:text-blue-300">Notes: {selectedReport.handoverNotes}</p>
                   )}
                 </div>
               )}
 
               {/* Status Action Buttons */}
-              <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-2.5">
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-2.5">
                 {(selectedReport.status || selectedReport.Status) !== 'RESOLVED' ? (
                   <button
                     disabled={actionLoading}
@@ -363,8 +363,8 @@ export function MyReportsPage() {
                   </button>
                 )}
                 <Link
-                  to="/matches"
-                  className="px-4 py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-xl transition flex items-center gap-1.5"
+                  to="/my-matches"
+                  className="px-4 py-3 bg-indigo-50 dark:bg-indigo-950/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-bold text-xs rounded-xl transition flex items-center gap-1.5"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Check Algorithm Matches</span>

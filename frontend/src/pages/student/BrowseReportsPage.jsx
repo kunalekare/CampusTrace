@@ -69,24 +69,24 @@ export function BrowseReportsPage() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200/80">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 dark:border-slate-800">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200/60 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/60 mb-2">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-            Live Campus Directory â€¢ Azure SQL Synced
+            Live Campus Directory • Azure SQL Synced
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
             Campus Lost & Found Directory
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             Browse, search, and recover belongings with automated AI matching and Azure Blob image verification.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 shadow-sm text-center">
-            <span className="block text-xs font-bold text-slate-400 uppercase tracking-wider">Total Active</span>
-            <span className="text-lg font-black text-slate-900">{reports.length}</span>
+          <div className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+            <span className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Total Active</span>
+            <span className="text-lg font-black text-slate-900 dark:text-white">{reports.length}</span>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@ export function BrowseReportsPage() {
       {/* Selected Item Full Detail Modal */}
       {selectedReport && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
-          <div className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 overflow-hidden max-h-[92vh] flex flex-col">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden max-h-[92vh] flex flex-col">
             
             {/* Modal Header Media (Azure Blob Photograph) */}
             <div className="relative bg-slate-900 w-full h-72 sm:h-80 flex-shrink-0 group">
@@ -164,62 +164,62 @@ export function BrowseReportsPage() {
             {/* Modal Scrollable Content */}
             <div className="p-6 sm:p-7 overflow-y-auto space-y-6">
               <div>
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
                   <span>{selectedReport.category}</span>
-                  {selectedReport.brand && <span>â€¢ {selectedReport.brand}</span>}
+                  {selectedReport.brand && <span>• {selectedReport.brand}</span>}
                 </div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
                   {selectedReport.title}
                 </h2>
               </div>
 
               {/* Description Box */}
-              <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+              <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4">
+                <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
                   Item Description
                 </h4>
-                <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                   {selectedReport.description}
                 </p>
               </div>
 
               {/* Key Metadata Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Location
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
                     <MapPin className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
                     <span className="truncate">{selectedReport.location}</span>
                   </div>
                 </div>
 
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Date Recorded
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
                     <Calendar className="w-3.5 h-3.5 text-indigo-600 flex-shrink-0" />
                     <span>{formatDate(selectedReport.eventDate)}</span>
                   </div>
                 </div>
 
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Color
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
                     <Palette className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
                     <span>{selectedReport.color || 'Unspecified'}</span>
                   </div>
                 </div>
 
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Reporter
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 truncate">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
                     <span className="w-2 h-2 rounded-full bg-emerald-500" />
                     <span className="truncate">{selectedReport.reporterName || 'Campus Student'}</span>
                   </div>
@@ -228,12 +228,12 @@ export function BrowseReportsPage() {
 
               {/* Distinctive Characteristics */}
               {selectedReport.distinctiveCharacteristics && (
-                <div className="bg-indigo-50/60 border border-indigo-200/70 rounded-2xl p-4">
-                  <h4 className="text-xs font-bold text-indigo-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <div className="bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/70 dark:border-indigo-800/70 rounded-2xl p-4">
+                  <h4 className="text-xs font-bold text-indigo-900 dark:text-indigo-200 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                     Distinctive Marks & Characteristics
                   </h4>
-                  <p className="text-xs text-indigo-800 leading-relaxed">
+                  <p className="text-xs text-indigo-800 dark:text-indigo-300 leading-relaxed">
                     {selectedReport.distinctiveCharacteristics}
                   </p>
                 </div>
@@ -241,18 +241,18 @@ export function BrowseReportsPage() {
 
               {/* Storage & Handover (Found Items) */}
               {selectedReport.reportType === 'FOUND' && (selectedReport.storageLocation || selectedReport.handoverNotes) && (
-                <div className="bg-blue-50/60 border border-blue-200/70 rounded-2xl p-4 space-y-2">
-                  <h4 className="text-xs font-bold text-blue-900 uppercase tracking-wider flex items-center gap-1.5">
+                <div className="bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200/70 dark:border-blue-800/70 rounded-2xl p-4 space-y-2">
+                  <h4 className="text-xs font-bold text-blue-900 dark:text-blue-200 uppercase tracking-wider flex items-center gap-1.5">
                     <Building2 className="w-3.5 h-3.5 text-blue-600" />
                     Custody & Physical Storage Location
                   </h4>
                   {selectedReport.storageLocation && (
-                    <p className="text-xs text-blue-900 font-semibold">
+                    <p className="text-xs text-blue-900 dark:text-blue-200 font-semibold">
                       Current Holding Office: {selectedReport.storageLocation}
                     </p>
                   )}
                   {selectedReport.handoverNotes && (
-                    <p className="text-xs text-blue-700">
+                    <p className="text-xs text-blue-700 dark:text-blue-300">
                       Handover Instructions: {selectedReport.handoverNotes}
                     </p>
                   )}
@@ -267,9 +267,9 @@ export function BrowseReportsPage() {
                     className="w-full py-3.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold text-sm rounded-2xl shadow-lg shadow-blue-500/25 transition transform active:scale-[0.99] flex items-center justify-center gap-2"
                   >
                     <ShieldCheck className="w-5 h-5 text-white/90" />
-                    <span>This Is My Item â€” Initiate Ownership Claim</span>
+                    <span>This Is My Item — Initiate Ownership Claim</span>
                   </button>
-                  <p className="text-center text-[11px] text-slate-400 mt-2">
+                  <p className="text-center text-[11px] text-slate-400 dark:text-slate-500 mt-2">
                     Claims require private verification details reviewed securely by campus administrators.
                   </p>
                 </div>
@@ -304,7 +304,7 @@ export function BrowseReportsPage() {
 
       {/* Claim Form Modal */}
       {showClaimModal && selectedReport && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
           <div className="max-w-md w-full">
             <ClaimForm
               reportId={selectedReport.reportId}

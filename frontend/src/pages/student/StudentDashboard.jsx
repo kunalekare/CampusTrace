@@ -107,42 +107,42 @@ export function StudentDashboard() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-amber-300 transition">
-          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:border-amber-300 dark:hover:border-amber-500 transition">
+          <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-3">
             <FileQuestion className="w-5 h-5" />
           </div>
-          <p className="text-2xl font-black text-slate-900">{stats?.totalLost ?? 0}</p>
-          <p className="text-xs font-semibold text-slate-500 mt-0.5">Total Lost Reports</p>
+          <p className="text-2xl font-black text-slate-900 dark:text-white">{stats?.totalLost ?? 0}</p>
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Total Lost Reports</p>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-blue-300 transition">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:border-blue-300 dark:hover:border-blue-500 transition">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3">
             <PackageCheck className="w-5 h-5" />
           </div>
-          <p className="text-2xl font-black text-slate-900">{stats?.totalFound ?? 0}</p>
-          <p className="text-xs font-semibold text-slate-500 mt-0.5">Total Found Reports</p>
+          <p className="text-2xl font-black text-slate-900 dark:text-white">{stats?.totalFound ?? 0}</p>
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Total Found Reports</p>
         </div>
 
         <Link 
           to="/my-matches"
-          className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-purple-400 hover:shadow-md transition group block"
+          className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-md transition group block"
         >
-          <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-105 transition">
+          <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3 group-hover:scale-105 transition">
             <Sparkles className="w-5 h-5" />
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-2xl font-black text-slate-900">{matchesCount}</p>
-            <span className="text-[10px] font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">View</span>
+            <p className="text-2xl font-black text-slate-900 dark:text-white">{matchesCount}</p>
+            <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-2 py-0.5 rounded-full">View</span>
           </div>
-          <p className="text-xs font-semibold text-slate-500 mt-0.5">Active Smart Matches</p>
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Active Smart Matches</p>
         </Link>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-emerald-300 transition">
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:border-emerald-300 dark:hover:border-emerald-500 transition">
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
             <CheckCircle className="w-5 h-5" />
           </div>
-          <p className="text-2xl font-black text-slate-900">{stats?.recoveredItems ?? 0}</p>
-          <p className="text-xs font-semibold text-slate-500 mt-0.5">Recovered Belongings</p>
+          <p className="text-2xl font-black text-slate-900 dark:text-white">{stats?.recoveredItems ?? 0}</p>
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Recovered Belongings</p>
         </div>
       </div>
 
@@ -150,10 +150,10 @@ export function StudentDashboard() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-lg font-bold text-slate-900">Recently Reported Campus Items</h2>
-            <p className="text-xs text-slate-400">Click any card to inspect high-resolution photographs & details</p>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Recently Reported Campus Items</h2>
+            <p className="text-xs text-slate-400 dark:text-slate-500">Click any card to inspect high-resolution photographs & details</p>
           </div>
-          <Link to="/browse" className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+          <Link to="/browse" className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
             <span>View full directory</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -162,7 +162,7 @@ export function StudentDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {recentReports.map(report => (
             <ReportCard 
-              key={report.reportId} 
+              key={report.reportId || report.ReportId} 
               report={report} 
               onSelect={(r) => setSelectedReport(r)} 
             />
@@ -173,7 +173,7 @@ export function StudentDashboard() {
       {/* Selected Item Full Detail Modal */}
       {selectedReport && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
-          <div className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 overflow-hidden max-h-[92vh] flex flex-col">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden max-h-[92vh] flex flex-col">
             {/* Modal Header Media */}
             <div className="relative bg-slate-900 w-full h-72 sm:h-80 flex-shrink-0 group">
               <ItemImage
@@ -228,60 +228,60 @@ export function StudentDashboard() {
             {/* Modal Body */}
             <div className="p-6 sm:p-7 overflow-y-auto space-y-5">
               <div>
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
                   <span>{selectedReport.category}</span>
                   {selectedReport.brand && <span>• {selectedReport.brand}</span>}
                 </div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
                   {selectedReport.title}
                 </h2>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+              <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4">
+                <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
                   Item Description
                 </h4>
-                <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                   {selectedReport.description}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Location
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
                     <MapPin className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
                     <span className="truncate">{selectedReport.location}</span>
                   </div>
                 </div>
 
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Date Recorded
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
                     <Calendar className="w-3.5 h-3.5 text-indigo-600 flex-shrink-0" />
                     <span>{formatDate(selectedReport.eventDate)}</span>
                   </div>
                 </div>
 
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Color
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
                     <Palette className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
                     <span>{selectedReport.color || 'Unspecified'}</span>
                   </div>
                 </div>
 
-                <div className="bg-slate-50/70 border border-slate-200/70 rounded-xl p-3">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <div className="bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 rounded-xl p-3">
+                  <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                     Reporter
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 truncate">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
                     <span className="w-2 h-2 rounded-full bg-emerald-500" />
                     <span className="truncate">{selectedReport.reporterName || 'Campus Student'}</span>
                   </div>

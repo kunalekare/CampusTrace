@@ -27,8 +27,8 @@ export function ReportFoundPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-4">
       <div>
-        <h1 className="text-2xl font-black text-slate-900">Report a Found Item</h1>
-        <p className="text-xs text-slate-500 mt-1">
+        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">Report a Found Item</h1>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Found something on campus? Register it to notify rightful owners while keeping private details secure.
         </p>
       </div>

@@ -40,72 +40,86 @@ export function RegisterPage() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-extrabold text-slate-900">Create Campus Account</h2>
-        <p className="text-xs text-slate-500 mt-1">Join the campus lost and found recovery network</p>
+        <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+          Create Campus Account
+        </h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          Join the campus lost and found recovery network
+        </p>
       </div>
 
       <ErrorMessage message={error} />
 
       <form onSubmit={handleSubmit} className="space-y-3.5">
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name *</label>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            Full Name *
+          </label>
           <input
             type="text"
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
             placeholder="Alex Mercer"
-            className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+            className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             required
           />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Campus Email *</label>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            Campus Email *
+          </label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="student@campus.edu"
-            className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+            className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             required
           />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Password *</label>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            Password *
+          </label>
           <input
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             placeholder="Min. 6 characters"
-            className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+            className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             required
           />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Student / ID #</label>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              Student / ID #
+            </label>
             <input
               type="text"
               name="studentId"
               value={formData.studentId}
               onChange={handleChange}
               placeholder="STU-10492"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Department</label>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              Department
+            </label>
             <input
               type="text"
               name="department"
               value={formData.department}
               onChange={handleChange}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
           </div>
         </div>
@@ -113,16 +127,16 @@ export function RegisterPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 mt-2 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-3 mt-2 rounded-xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/25 transition flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {loading && <Loader2 className="w-4 h-4 animate-spin" />}
           Register
         </button>
       </form>
 
-      <div className="text-center text-xs text-slate-500">
+      <div className="text-center text-xs text-slate-500 dark:text-slate-400">
         Already registered?{' '}
-        <Link to="/login" className="font-semibold text-blue-600 hover:underline">
+        <Link to="/login" className="font-bold text-blue-600 dark:text-blue-400 hover:underline">
           Sign In
         </Link>
       </div>

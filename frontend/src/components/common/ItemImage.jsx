@@ -66,13 +66,13 @@ export function ItemImage({ blobName, category, alt = 'Campus item', className =
   return (
     <div
       onClick={onClick}
-      className={`relative overflow-hidden bg-slate-100 group ${className} ${
+      className={`relative overflow-hidden bg-slate-100 dark:bg-slate-800 group ${className} ${
         onClick ? 'cursor-pointer' : ''
       }`}
     >
       {!loaded && (
-        <div className="absolute inset-0 bg-slate-200 animate-pulse flex items-center justify-center">
-          <Package className="w-8 h-8 text-slate-300 animate-bounce" />
+        <div className="absolute inset-0 bg-slate-200 dark:bg-slate-800 animate-pulse flex items-center justify-center">
+          <Package className="w-8 h-8 text-slate-300 dark:text-slate-600 animate-bounce" />
         </div>
       )}
 

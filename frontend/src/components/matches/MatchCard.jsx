@@ -13,20 +13,20 @@ export function MatchCard({ match, onDismiss, onClaim }) {
   const foundBlob = foundReport?.imageBlobName || foundReport?.ImageBlobName;
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-purple-300 transition-all duration-300 p-5 space-y-4 flex flex-col justify-between">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300 p-5 space-y-4 flex flex-col justify-between">
       {/* Header with Match Score */}
       <div>
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-purple-700 bg-purple-100/70 border border-purple-200/70 px-2.5 py-1 rounded-xl">
-              <Sparkles className="w-3.5 h-3.5 text-purple-600" />
+            <span className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-950/60 border border-purple-200/70 dark:border-purple-850 px-2.5 py-1 rounded-xl">
+              <Sparkles className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
               Automated AI Pair
             </span>
             <MatchScore score={score} />
           </div>
           <button
             onClick={() => onDismiss(match.matchId)}
-            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition"
+            className="p-1.5 text-slate-400 dark:text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 rounded-xl transition"
             title="Dismiss non-matching item"
           >
             <X className="w-4 h-4" />
@@ -36,7 +36,7 @@ export function MatchCard({ match, onDismiss, onClaim }) {
         {/* Side-by-Side Visual Comparison Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
           {/* Lost Item Column */}
-          <div className="rounded-2xl border border-amber-200/80 bg-amber-50/30 overflow-hidden flex flex-col">
+          <div className="rounded-2xl border border-amber-200/80 dark:border-amber-800/80 bg-amber-50/30 dark:bg-amber-950/20 overflow-hidden flex flex-col">
             <div className="relative">
               <ItemImage
                 blobName={lostBlob}
@@ -55,19 +55,19 @@ export function MatchCard({ match, onDismiss, onClaim }) {
             </div>
 
             <div className="p-3 space-y-1">
-              <h4 className="font-bold text-slate-900 text-xs line-clamp-1">{lostReport?.title}</h4>
-              <p className="text-[11px] text-slate-500 flex items-center gap-1">
+              <h4 className="font-bold text-slate-900 dark:text-white text-xs line-clamp-1">{lostReport?.title}</h4>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
                 <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
                 <span className="truncate">{lostReport?.location}</span>
               </p>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-400 dark:text-slate-500">
                 {formatDate(lostReport?.eventDate)}
               </p>
             </div>
           </div>
 
           {/* Found Item Column */}
-          <div className="rounded-2xl border border-blue-200/80 bg-blue-50/30 overflow-hidden flex flex-col">
+          <div className="rounded-2xl border border-blue-200/80 dark:border-blue-800/80 bg-blue-50/30 dark:bg-blue-950/20 overflow-hidden flex flex-col">
             <div className="relative">
               <ItemImage
                 blobName={foundBlob}
@@ -86,12 +86,12 @@ export function MatchCard({ match, onDismiss, onClaim }) {
             </div>
 
             <div className="p-3 space-y-1">
-              <h4 className="font-bold text-slate-900 text-xs line-clamp-1">{foundReport?.title}</h4>
-              <p className="text-[11px] text-slate-500 flex items-center gap-1">
+              <h4 className="font-bold text-slate-900 dark:text-white text-xs line-clamp-1">{foundReport?.title}</h4>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
                 <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
                 <span className="truncate">{foundReport?.location}</span>
               </p>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-400 dark:text-slate-500">
                 {formatDate(foundReport?.eventDate)}
               </p>
             </div>
@@ -100,11 +100,11 @@ export function MatchCard({ match, onDismiss, onClaim }) {
 
         {/* Algorithm Match Breakdown */}
         {matchReasons.length > 0 && (
-          <div className="mt-3 bg-purple-50/40 border border-purple-100 rounded-xl p-3">
-            <p className="text-[11px] font-bold text-purple-900 uppercase tracking-wider mb-1">
+          <div className="mt-3 bg-purple-50/40 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-800/60 rounded-2xl p-3">
+            <p className="text-[11px] font-bold text-purple-900 dark:text-purple-200 uppercase tracking-wider mb-1">
               Matching Criteria:
             </p>
-            <ul className="text-xs text-purple-800 space-y-1 list-disc list-inside">
+            <ul className="text-xs text-purple-800 dark:text-purple-300 space-y-1 list-disc list-inside">
               {matchReasons.map((r, i) => (
                 <li key={i}>{r}</li>
               ))}
@@ -114,8 +114,8 @@ export function MatchCard({ match, onDismiss, onClaim }) {
       </div>
 
       {/* Footer Actions */}
-      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-100">
-        <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
+      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500">
           <ShieldAlert className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
           <span>Verification required before custody release</span>
         </div>

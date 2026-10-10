@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Calendar, Tag, ArrowRight, ShieldCheck } from 'lucide-react';
 import { formatDate } from '../../utils/dateUtils';
-import { getStatusBadgeClass } from '../../utils/formatters';
 import { ItemImage } from '../common/ItemImage';
 
 export function ReportCard({ report, onSelect }) {
@@ -20,7 +19,7 @@ export function ReportCard({ report, onSelect }) {
   return (
     <div 
       onClick={handleClick}
-      className={`group bg-white rounded-2xl border border-slate-200/90 hover:border-blue-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between ${
+      className={`group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between ${
         onSelect ? 'cursor-pointer' : ''
       }`}
     >
@@ -60,25 +59,25 @@ export function ReportCard({ report, onSelect }) {
 
         {/* Content Section */}
         <div className="p-5">
-          <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500 mb-2">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+          <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-2">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               <Tag className="w-3 h-3 text-slate-400" />
               {report.category}
             </span>
             {report.brand && (
-              <span className="text-slate-400 font-medium">• {report.brand}</span>
+              <span className="text-slate-400 dark:text-slate-500 font-medium">• {report.brand}</span>
             )}
           </div>
 
-          <h3 className="text-base font-bold text-slate-900 line-clamp-1 group-hover:text-blue-600 transition-colors">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             {report.title}
           </h3>
 
-          <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">
             {report.description}
           </p>
 
-          <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-500">
+          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
             <div className="flex items-center gap-2">
               <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
               <span className="line-clamp-1 font-medium">{report.location}</span>
@@ -92,8 +91,8 @@ export function ReportCard({ report, onSelect }) {
       </div>
 
       {/* Footer / Action */}
-      <div className="px-5 pb-5 pt-1 flex items-center justify-between border-t border-slate-50 mt-1">
-        <span className="text-[11px] text-slate-400 font-medium truncate max-w-[150px]">
+      <div className="px-5 pb-5 pt-1 flex items-center justify-between border-t border-slate-50 dark:border-slate-800/60 mt-1">
+        <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium truncate max-w-[150px]">
           By {report.reporterName || 'Campus Student'}
         </span>
         {onSelect ? (
@@ -103,7 +102,7 @@ export function ReportCard({ report, onSelect }) {
               e.stopPropagation();
               onSelect(report);
             }}
-            className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:text-blue-700 transition group-hover:translate-x-0.5"
+            className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition group-hover:translate-x-0.5"
           >
             <span>View Details & Photo</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -111,7 +110,7 @@ export function ReportCard({ report, onSelect }) {
         ) : (
           <Link
             to={`/browse?selected=${reportId}`}
-            className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:text-blue-700 transition group-hover:translate-x-0.5"
+            className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition group-hover:translate-x-0.5"
           >
             <span>View Details & Photo</span>
             <ArrowRight className="w-3.5 h-3.5" />

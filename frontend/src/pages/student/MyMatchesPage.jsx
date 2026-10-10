@@ -34,8 +34,8 @@ export function MyMatchesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-black text-slate-900">Smart Algorithmic Matches</h1>
-        <p className="text-xs text-slate-500 mt-1">
+        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">Smart Algorithmic Matches</h1>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Automated pairings detected by comparing category, keywords, brand, location, and dates.
         </p>
       </div>
@@ -61,7 +61,7 @@ export function MyMatchesPage() {
       )}
 
       {claimTarget && (
-        <div className="fixed inset-0 bg-slate-900/50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
           <div className="max-w-md w-full">
             <ClaimForm
               reportId={claimTarget.reportId}

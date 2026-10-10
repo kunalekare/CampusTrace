@@ -1,3 +1,7 @@
+concurrency:
+  group: campustrace-static-web-app-production
+  cancel-in-progress: false
+  
 name: Deploy CampusTrace Frontend to Azure Static Web Apps
 
 on:

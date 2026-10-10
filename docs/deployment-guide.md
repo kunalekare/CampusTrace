@@ -1,193 +1,150 @@
-# CampusTrace: Complete Microsoft Azure Cloud Deployment Guide
+# CampusTrace: Microsoft Azure Production Deployment Guide
 
-This guide walks through step-by-step provisioning, configuring, and deploying CampusTrace across Microsoft Azure services.
-
----
-
-## 1. Prerequisites
-- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) installed (`az version >= 2.50.0`)
-- Active Microsoft Azure Subscription
-- GitHub repository with automated workflow permissions
+This guide details the complete deployment of the **CampusTrace** application to Microsoft Azure using your existing Azure resources and GitHub repository ([`https://github.com/kunalekare/CampusTrace.git`](https://github.com/kunalekare/CampusTrace.git)).
 
 ---
 
-## 2. Resource Group & Base Setup
+## 1. Existing Active Azure Resources
 
-Login and initialize your cloud resource group:
-```bash
-az login
-az group create --name rg-campustrace-prod-eastus --location eastus
-```
-
----
-
-## 3. Azure SQL Database Provisioning
-
-1. Create the Logical SQL Server:
-```bash
-az sql server create \
-  --name sql-campustrace-prod \
-  --resource-group rg-campustrace-prod-eastus \
-  --location eastus \
-  --admin-user campustrace_admin \
-  --admin-password 'YourSecurePassword!2026'
-```
-
-2. Configure Azure Firewall to allow internal Azure connections:
-```bash
-az sql server firewall-rule create \
-  --resource-group rg-campustrace-prod-eastus \
-  --server sql-campustrace-prod \
-  --name AllowAzureServices \
-  --start-ip-address 0.0.0.0 \
-  --end-ip-address 0.0.0.0
-```
-
-3. Provision the Serverless Database:
-```bash
-az sql db create \
-  --resource-group rg-campustrace-prod-eastus \
-  --server sql-campustrace-prod \
-  --name CampusTraceDB \
-  --edition GeneralPurpose \
-  --family Gen5 \
-  --capacity 2 \
-  --auto-pause-delay 60 \
-  --compute-model Serverless
-```
-
-4. Initialize database schema in Azure Portal Query Editor (or via SSMS) using:
-   - `database/schema.sql`
-   - `database/indexes.sql`
-   - `database/constraints.sql`
-   - `database/seed.sql`
-   - `database/views.sql`
+- **Resource Group**: `CampusTrace-RG`
+- **Azure SQL Server**: `campustrace.database.windows.net`
+- **Azure SQL Database**: `CampusTraceDB`
+- **Storage Account**: `campustracestorage`
+- **Blob Container**: `campustrace-images`
+- **GitHub Repository**: `https://github.com/kunalekare/CampusTrace.git`
 
 ---
 
-## 4. Azure Blob Storage Setup
+## 2. Deployment Architecture Overview
 
-Create a storage account and the private container for item photographs:
-```bash
-az storage account create \
-  --name stcampustraceprod \
-  --resource-group rg-campustrace-prod-eastus \
-  --location eastus \
-  --sku Standard_LRS \
-  --kind StorageV2 \
-  --allow-blob-public-access true
-
-az storage container create \
-  --account-name stcampustraceprod \
-  --name item-photos \
-  --public-access blob
 ```
-
-Retrieve the connection string for app configuration:
-```bash
-az storage account show-connection-string \
-  --name stcampustraceprod \
-  --resource-group rg-campustrace-prod-eastus \
-  --query connectionString -o tsv
+[Student / Campus User]
+          │
+          ▼ HTTPS
+[Azure Static Web Apps] (React + Vite SPA Frontend)
+          │
+          ▼ REST API calls (HTTPS / CORS enabled)
+[Azure App Service (Linux, Node.js 20 LTS)] (Express Backend API)
+     ┌────┴───────────────────────────┐
+     ▼ Entra ID Token / TLS           ▼ SAS / Connection String
+[Azure SQL Database: CampusTraceDB]   [Azure Blob Storage: campustracestorage]
 ```
 
 ---
 
-## 5. Backend Deployment (Azure App Service)
+## 3. Step 1: Deploy Backend REST API to Azure App Service
 
-1. Create a Linux App Service Plan:
-```bash
-az appservice plan create \
-  --name plan-campustrace-prod \
-  --resource-group rg-campustrace-prod-eastus \
-  --is-linux \
-  --sku B1
-```
+### Option A: Via Azure Portal (Recommended)
 
-2. Create the Express API Web App:
-```bash
-az webapp create \
-  --name app-campustrace-api-prod \
-  --resource-group rg-campustrace-prod-eastus \
-  --plan plan-campustrace-prod \
-  --runtime "NODE:20-lts"
-```
+1. Open the [Azure Portal](https://portal.azure.com).
+2. Click **Create a resource** > **Web App**.
+3. Fill in the **Basics** tab:
+   - **Subscription**: Your Azure Subscription
+   - **Resource Group**: Select your existing `CampusTrace-RG`
+   - **Name**: `app-campustrace-api` (or a unique name, e.g. `campustrace-api-<unique>`)
+   - **Publish**: `Code`
+   - **Runtime stack**: `Node 20 LTS`
+   - **Operating System**: `Linux`
+   - **Region**: Same region as your resource group (e.g. `East US` or `Central India`)
+   - **Pricing Plan**: `Free F1` or `Basic B1`
+4. Click **Review + create** > **Create**.
 
-3. Configure Application Settings in App Service:
-```bash
-az webapp config appsettings set \
-  --resource-group rg-campustrace-prod-eastus \
-  --name app-campustrace-api-prod \
-  --settings \
-    NODE_ENV=production \
-    PORT=8080 \
-    FRONTEND_URL=https://your-frontend.azurestaticapps.net \
-    JWT_SECRET=super_secure_campustrace_production_jwt_secret_key_32_characters \
-    DB_SERVER=sql-campustrace-prod.database.windows.net \
-    DB_NAME=CampusTraceDB \
-    DB_USER=campustrace_admin \
-    DB_PASSWORD='YourSecurePassword!2026' \
-    DB_ENCRYPT=true \
-    AZURE_STORAGE_ACCOUNT=stcampustraceprod \
-    AZURE_STORAGE_CONTAINER=item-photos \
-    AZURE_STORAGE_CONNECTION_STRING="<your-storage-connection-string>"
-```
+### Configure App Service Environment Variables (Application Settings)
+Once created, open your App Service in Azure Portal:
+1. In the left menu, select **Configuration** (or **Environment variables**).
+2. Under **Application settings**, add the following key-value pairs:
 
-4. Deploy via GitHub Actions (`.github/workflows/backend-deploy.yml`) or ZIP deployment:
-```bash
-az webapp deploy --resource-group rg-campustrace-prod-eastus --name app-campustrace-api-prod --src-path ./backend.zip
-```
+| Name | Recommended Value |
+| :--- | :--- |
+| `NODE_ENV` | `production` |
+| `PORT` | `8080` |
+| `DB_SERVER` | `campustrace.database.windows.net` |
+| `DB_NAME` | `CampusTraceDB` |
+| `DB_AUTH_MODE` | `azure-identity` |
+| `AZURE_TENANT_ID` | `3fa4e4bd-010b-47e1-b418-16840b1509fa` |
+| `AZURE_STORAGE_ACCOUNT` | `campustracestorage` |
+| `AZURE_STORAGE_CONTAINER_NAME` | `campustrace-images` |
+| `AZURE_STORAGE_CONNECTION_STRING` | `DefaultEndpointsProtocol=https;AccountName=campustracestorage;AccountKey=...;EndpointSuffix=core.windows.net` |
+| `JWT_SECRET` | A secure random 64-character secret string |
+| `JWT_EXPIRES_IN` | `7d` |
+| `USE_MOCK_DB` | `false` |
 
----
+3. Click **Save** and **Continue**.
 
-## 6. Frontend Deployment (Azure Static Web Apps)
-
-1. Provision the Azure Static Web App resource:
-```bash
-az staticwebapp create \
-  --name swa-campustrace-prod \
-  --resource-group rg-campustrace-prod-eastus \
-  --location eastus2 \
-  --source https://github.com/<your-username>/CampusTrace \
-  --branch main \
-  --app-location "/frontend" \
-  --output-location "dist"
-```
-
-2. Set the production backend URL in Static Web App settings:
-```bash
-az staticwebapp appsettings set \
-  --name swa-campustrace-prod \
-  --setting-names VITE_API_BASE_URL="https://app-campustrace-api-prod.azurewebsites.net/api"
-```
+### Deploy Code via Deployment Center (GitHub CI/CD)
+1. In the App Service left menu, click **Deployment Center**.
+2. **Source**: Select `GitHub`.
+3. Authorize GitHub, select organization `kunalekare`, repository `CampusTrace`, and branch `main`.
+4. In build settings, set directory to `backend`.
+5. Click **Save**. Azure will automatically generate a GitHub Actions workflow to build and deploy your backend!
 
 ---
 
-## 7. Telemetry & Application Insights
+## 4. Step 2: Grant Managed Identity & Azure SQL Database Access
 
-Create the Application Insights component for real-time monitoring:
-```bash
-az monitor app-insights component create \
-  --app appi-campustrace-prod \
-  --location eastus \
-  --resource-group rg-campustrace-prod-eastus \
-  --application-type web
-```
+To allow your Azure App Service to query Azure SQL Database securely:
 
-Copy the `ConnectionString` into `app-campustrace-api-prod` under `APPLICATIONINSIGHTS_CONNECTION_STRING`.
+1. In your App Service, go to **Identity** (under Settings) > Set **Status** to **On** > Click **Save**.
+2. Note the App Service name (e.g. `app-campustrace-api`).
+3. In Azure Portal, open your SQL Database **CampusTraceDB** > **Query Editor**.
+4. Log in as Entra ID admin and run:
+   ```sql
+   CREATE USER [app-campustrace-api] FROM EXTERNAL PROVIDER;
+   ALTER ROLE db_datareader ADD MEMBER [app-campustrace-api];
+   ALTER ROLE db_datawriter ADD MEMBER [app-campustrace-api];
+   ```
+5. In your Storage Account **`campustracestorage`** > **Access Control (IAM)** > **Add role assignment**:
+   - Role: `Storage Blob Data Contributor`
+   - Members: Select Managed Identity > Choose `app-campustrace-api`.
 
 ---
 
-## 8. Expected Cloud Costs & Cleanup
+## 5. Step 3: Deploy Frontend to Azure Static Web Apps
 
-### Cost Optimization:
-- **Azure SQL Serverless**: Pauses automatically during inactivity ($5–$15/month).
-- **Azure App Service B1**: Baseline tier (~$13/month).
-- **Azure Static Web Apps**: Free Tier tier ($0).
-- **Blob Storage & Telemetry**: Pay-as-you-go (<$2/month).
+1. In Azure Portal, click **Create a resource** > search for **Static Web App** > Click **Create**.
+2. Fill in the **Basics** tab:
+   - **Resource Group**: `CampusTrace-RG`
+   - **Name**: `campustrace-web`
+   - **Plan type**: `Free`
+   - **Deployment details**: Select `GitHub`
+   - **Organization**: `kunalekare`
+   - **Repository**: `CampusTrace`
+   - **Branch**: `main`
+3. Under **Build Details**:
+   - **Build Presets**: `Custom`
+   - **App location**: `frontend`
+   - **Api location**: *(leave empty)*
+   - **Output location**: `dist`
+4. Click **Review + Create** > **Create**.
 
-### Complete Teardown:
-To prevent recurring charges after coursework evaluation:
-```bash
-az group delete --name rg-campustrace-prod-eastus --yes --no-wait
-```
+### Set Frontend Environment Variable
+1. Open your newly created Static Web App in Azure Portal.
+2. Go to **Environment variables** (or **Configuration**).
+3. Add:
+   - **Name**: `VITE_API_BASE_URL`
+   - **Value**: `https://<your-backend-app-name>.azurewebsites.net/api`
+4. Click **Save**.
+
+---
+
+## 6. Step 4: Configure CORS on Backend App Service
+
+Because the frontend runs on an `azurestaticapps.net` domain and calls the backend on `azurewebsites.net`, you must enable CORS:
+
+1. Open your App Service in Azure Portal.
+2. In the left menu, select **API** > **CORS**.
+3. Under **Allowed Origins**, enter:
+   - `https://<your-static-web-app-name>.azurestaticapps.net`
+   - `http://localhost:5173` *(for local development)*
+4. Check the box **"Enable Access-Control-Allow-Credentials"**.
+5. Click **Save**.
+
+---
+
+## 7. Verification Checklist
+
+- [ ] Backend health check responds: `https://<app-name>.azurewebsites.net/api/health` returns `200 OK` with `status: "healthy"`.
+- [ ] Frontend loads smoothly on your Azure Static Web Apps URL.
+- [ ] Student login works and creates an Entra-backed session.
+- [ ] Reporting a lost item with a photo uploads to `campustracestorage` container `campustrace-images`.
+- [ ] Browsing directory displays uploaded photographs with click-to-expand lightbox.

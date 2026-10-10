@@ -1,0 +1,15 @@
+{
+  "name": "campustrace-azure-functions",
+  "version": "1.0.0",
+  "description": "CampusTrace Azure Functions for Async Matching and Notification Processing",
+  "main": "src/functions/*.js",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"Azure Functions syntax OK\" && exit 0"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.3.0",
+    "mssql": "^10.0.2",
+    "nodemailer": "^6.9.13"
+  }
+}

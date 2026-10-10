@@ -1,0 +1,37 @@
+{
+  "name": "campustrace-monorepo",
+  "version": "1.0.0",
+  "description": "CampusTrace: Smart Lost & Found Network for Campus deployed on Microsoft Azure",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "functions"
+  ],
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "build": "npm run build:frontend && npm run build:backend",
+    "test:backend": "npm --prefix backend test",
+    "test": "node scripts/run-tests.js",
+    "check-env": "node scripts/check-environment.js"
+  },
+  "keywords": [
+    "lost-and-found",
+    "campustrace",
+    "azure-sql",
+    "azure-blob-storage",
+    "azure-functions",
+    "react",
+    "vite",
+    "tailwind"
+  ],
+  "author": "CampusTrace Engineering Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

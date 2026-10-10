@@ -1,0 +1,24 @@
+# CampusTrace Demonstration Script & Verification Checklist
+
+- [ ] **Infrastructure Check**: Confirm Azure SQL Database, Blob Storage, and App Service are active.
+- [ ] **Student Report Lost**:
+  - Sign in as student `student@campus.edu` (Password: `Student@12345`).
+  - Navigate to **Report Lost Item**.
+  - Submit: "Space Grey MacBook Pro 14", Category: Electronics, Location: Library 2nd Floor, Color: Grey.
+- [ ] **Student / Security Report Found**:
+  - Sign in as finder or staff member.
+  - Navigate to **Report Found Item**.
+  - Submit: "Apple MacBook Laptop found on Library study desk", Category: Electronics, Location: Main Library.
+  - Upload sample laptop photo (stored on Azure Blob Storage).
+- [ ] **Smart Matching Engine Execution**:
+  - Show the **My Matches** dashboard displaying the automatically detected pairing with an ~88% Match Confidence Score.
+- [ ] **Ownership Claim & Verification**:
+  - Click **Claim Item**. Provide ownership proof: "Serial number C02... and sticker of GitHub on bottom casing".
+  - Submit claim.
+- [ ] **Administrator Verification & Handover**:
+  - Log in as Administrator `admin@campustrace.edu` (Password: `Admin@12345`).
+  - Open **Manage Claims Page**.
+  - Inspect the claim proof, verify ownership details, and click **Approve & Mark Resolved**.
+- [ ] **Real-Time Notification & Audit Trail**:
+  - Demonstrate student receives approval notification with campus security collection locker details.
+  - Review immutable entry in **Audit Logs Page**.

@@ -15,7 +15,10 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: appConfig.frontendUrl || '*',
+  origin: [
+    'https://wonderful-water-02549d100.3.azurestaticapps.net',
+    'http://localhost:5173' // for local development if needed
+  ],
   credentials: true
 }));
 

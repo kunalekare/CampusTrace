@@ -13,6 +13,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: campustrace-backend-deployment
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -25,8 +29,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
-          # cache: npm
-          # cache-dependency-path: backend/package-lock.json
 
       - name: Install Dependencies
         working-directory: backend
@@ -40,9 +42,16 @@ jobs:
         working-directory: backend
         run: npm run build --if-present
 
+      - name: Verify Backend Entry Point
+        working-directory: backend
+        run: |
+          test -f server.js
+          test -f app.js
+          echo "Backend entry point files verified."
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: app-campustrace-api-prod
+          app-name: app-campustrace-api
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ./backend

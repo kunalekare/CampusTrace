@@ -1,5 +1,9 @@
 name: Azure Static Web Apps CI/CD
 
+concurrency:
+  group: campustrace-static-web-app-production
+  cancel-in-progress: false
+
 on:
   push:
     branches:

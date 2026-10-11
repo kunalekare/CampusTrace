@@ -1,4 +1,4 @@
-```yaml
+
 # Deploy CampusTrace Backend to Azure App Service
 
 name: Deploy CampusTrace Backend to Azure Web App
@@ -88,4 +88,3 @@ jobs:
           app-name: app-campustrace-api
           slot-name: Production
           package: .
-```

@@ -14,12 +14,16 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
 
+
+
 app.use(cors({
   origin: [
     'https://wonderful-water-02549d100.3.azurestaticapps.net',
-    'http://localhost:5173' // for local development if needed
+    'http://localhost:5173' // for local development
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());

@@ -1,5 +1,12 @@
 import sql from 'mssql';
-import { DefaultAzureCredential, AzureCliCredential, ChainedTokenCredential } from '@azure/identity';
+
+import {
+  DefaultAzureCredential,
+  AzureCliCredential,
+  ChainedTokenCredential,
+  ManagedIdentityCredential
+} from '@azure/identity';
+
 import { appConfig } from './appConfig.js';
 import { logger } from '../utils/logger.js';
 
@@ -13,21 +20,35 @@ const AZURE_SQL_RESOURCE = 'https://database.windows.net/.default';
 /**
  * Acquires a Microsoft Entra ID access token for Azure SQL
  */
-export async function getAzureSqlToken() {
-  const credentialOptions = appConfig.db.tenantId ? { tenantId: appConfig.db.tenantId } : {};
 
-  // For developer environments, prioritize AzureCliCredential and fall back to DefaultAzureCredential
-  const credential = new ChainedTokenCredential(
-    new AzureCliCredential(credentialOptions),
-    new DefaultAzureCredential(credentialOptions)
+export async function getAzureSqlToken() {
+  const credentialOptions = appConfig.db.tenantId
+    ? { tenantId: appConfig.db.tenantId }
+    : {};
+
+  // Production: explicitly use the App Service managed identity.
+  // Development: use Azure CLI, then DefaultAzureCredential.
+  const credential =
+    appConfig.env === 'production'
+      ? new ManagedIdentityCredential()
+      : new ChainedTokenCredential(
+          new AzureCliCredential(credentialOptions),
+          new DefaultAzureCredential(credentialOptions)
+        );
+
+  const tokenResponse = await credential.getToken(
+    AZURE_SQL_RESOURCE
   );
 
-  const tokenResponse = await credential.getToken(AZURE_SQL_RESOURCE);
-  if (!tokenResponse || !tokenResponse.token) {
-    throw new Error('Received an empty access token from Microsoft Entra identity provider.');
+  if (!tokenResponse?.token) {
+    throw new Error(
+      'Received an empty access token from Microsoft Entra ID.'
+    );
   }
+
   return tokenResponse;
 }
+
 
 /**
  * Categorizes raw SQL / network / Entra ID errors into actionable diagnostics
